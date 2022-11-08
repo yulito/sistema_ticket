@@ -3,7 +3,7 @@
 
     <footer>
         <!--------- imagen ---------->
-        <img src="statics/images/circuito1.jpg" alt="foto">
+        <img src="<?=base_url?>statics/images/circuito1.jpg" alt="foto">
     </footer>
 </body>
 
