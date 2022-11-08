@@ -25,28 +25,28 @@
 
 <!-- Agregar Ticket -->        
 <div class="form-add-ticket">
-    <form action="" method="post">
+    <form class="formTicket-add" action="" method="post">
     <div class="sub">
         <h2>Agregar Ticket</h2>
     </div>
     
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Asunto</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Problema con ...">
+            <label for="asunto" class="form-label">Asunto</label>
+            <input type="text" class="form-control" id="asunto" name="asunto" placeholder="Problema con ...">
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
         </div>
         <!-- Aquí debe ser un select anidado -->
-        <select class="form-select mb-3" aria-label="select depto">
+        <select class="form-select mb-3" aria-label="select depto" name="depto">
             <option selected>Departamento</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
         </select>
 
-        <select class="form-select mb-3" aria-label="select user" disabled>
+        <select class="form-select mb-3" aria-label="select user" name="usuario" disabled>
             <option selected>Usuarios</option>
             <option value="1">One</option>
             <option value="2">Two</option>
