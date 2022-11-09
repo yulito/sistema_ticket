@@ -1,9 +1,10 @@
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Yulian Murti</a> <!-- Nos lleva al perfil -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#"> <?=$_SESSION['user']['regular']->nombre ?></a> 
+        <a class="navbar-brand" href="<?=base_url?>usuario/logout">
             <div id="logout">X</div>
         </a>
+        
     </div>
 </nav>                    
 
@@ -21,6 +22,18 @@
     <li class="nav-item">
         <a class="nav-link" href="#">Resueltos</a>
     </li>
+
+    <?php if(isset($_SESSION['user']['admin'])) : ?>
+            
+        <li class="nav-item">
+            <a class="nav-link" href="#">Usuarios</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Departamentos</a>
+        </li>
+
+    <?php endif; ?>
+
 </ul>
 
 <!-- Agregar Ticket -->        

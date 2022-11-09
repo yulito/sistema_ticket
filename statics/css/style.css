@@ -55,3 +55,11 @@ form{
     margin-top: 32px;
     margin-bottom: 32px;
 }
+li{
+    list-style-type: none;
+    display: inline;
+    padding-right: 5px;
+}
+.red{
+    color: red;
+}

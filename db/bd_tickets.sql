@@ -59,7 +59,7 @@ CREATE TABLE `departamento` (
 
 LOCK TABLES `departamento` WRITE;
 /*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
-INSERT INTO `departamento` VALUES (1,'Finanzas'),(2,'RRHH'),(3,'Ventas'),(4,'Produccion'),(5,'Seguridad');
+INSERT INTO `departamento` VALUES (1,'TI');
 /*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
 UNLOCK TABLES;
 

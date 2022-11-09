@@ -38,7 +38,7 @@ class User{
         $this->idUser = $idUser;
     }
     function setName($name) {
-        $this->name = $this->db->real_escape_string($name);
+        $this->name = $this->db->real_escape_string(strtoupper($name));
     }
     function setMail($mail) {
         $this->mail = $this->db->real_escape_string($mail);
@@ -53,5 +53,48 @@ class User{
         $this->idTipo = $idTipo;
     }
 
+    //----------------------------------------------------
+
+    public function insertUser() {
+        $sql = "INSERT INTO usuario VALUES(NULL,'{$this->getName()}','{$this->getMail()}','{$this->getPass()}','{$this->getIdDepto()}','{$this->getIdTipo()}')";
+        $tipos = $this->db->query($sql);
+		return $tipos;
+    }
+
+    //---------------------------------------------------------
+
+    public function sesion($id,$acceso){
+
+        $sql = "INSERT INTO sesion VALUES(NULL, NOW(),'$acceso','$id')";
+        $query = $this->db->query($sql);
+        if($query){
+            $result = true;
+        }
+        return $result;
+    }
     
+    //---------------------------------------------------------
+    public function login($password) {        
+
+        $correo = $this->getMail();
+		
+		// Comprobar si existe el usuario
+		$sql = "SELECT * FROM usuario WHERE correo = '$correo'";
+		$login = $this->db->query($sql);		
+		
+		if($login && $login->num_rows == 1){
+			$usuario = $login->fetch_object();
+			
+			// Verificar la contraseña
+			$verify = password_verify($password, $usuario->password); 
+			$result = false;
+			if($verify){
+                //Guardamos la sesion
+                $this->sesion($usuario->id_usuario,1);
+				$result = $usuario;
+			}
+		}
+
+        return $result;
+    }
 }

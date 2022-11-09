@@ -1,5 +1,6 @@
 <div class="form-add-user">
-    <form class="formUserAdd" action="" method="post">
+    <form class="formUserAdd" action="<?=base_url?>usuario/add" method="post">
+
         <div class="sub">
             <h2>Agregar usuario</h2>
         </div>  
@@ -8,11 +9,23 @@
             <input type="text" class="form-control" id="user" name="user" >
         </div>
 
+        <!-- debe de ir un while -->        
         <select class="form-select mb-3" aria-label="select depto" name="depto">
-            <option selected>Departamentos</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option selected disabled>Departamentos</option>
+
+            <?php while($depto = $deptos->fetch_object()) : ?>
+            <option value="<?=$depto->id_depto ?>"><?=$depto->depto ?></option>
+            <?php endwhile; ?>
+
+        </select>
+        
+        <select class="form-select mb-3" aria-label="select tipo" name="tipo">
+            <option selected disabled>Tipo Usuario</option>
+            
+            <?php while($tipo = $tipos->fetch_object()) : ?>
+            <option value="<?=$tipo->id_tipo ?>"><?=$tipo->tipo ?></option>
+            <?php endwhile; ?>
+
         </select>
 
         <div class="mb-3">
