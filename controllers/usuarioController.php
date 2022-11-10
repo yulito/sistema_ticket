@@ -107,8 +107,16 @@ class usuarioController{
     //---------------------------------------
 
     public function check() {
+
         $deptos = Utils::showDeptos();
         $tipos = Utils::showTipos();
+
+        $obj = new User();
+        $list = $obj->getAll($_SESSION['user']['regular']->id_usuario);
+
+        if(!$list){
+            $_SESSION['error-list'] = 'No hay usuarios agregados';
+        }
         require_once 'views/users/add.php';
     } 
 

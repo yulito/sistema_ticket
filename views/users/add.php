@@ -60,3 +60,39 @@
         <button type="submit" class="btn btn-primary">Agregar</button>
     </form>
 </div>
+
+<div class="sub">
+    <h2>Listado de Usuarios</h2>
+</div>        
+<hr>
+<table class="table table-bordered table-info table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Nro</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Perfil</th>
+            <!-- Para botones -->
+            <th scope="col">Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $count = 1;?>
+        <?php while($listUser = $list->fetch_object()): ?>
+        <tr>
+            <th scope="row"><?=$count?></th>
+            <td><?=$listUser->nombre ?></td>
+            <td><?=$listUser->correo ?></td>
+            <td><?=$listUser->depto ?></td>
+            <td><?=$listUser->tipo ?></td>
+            <td>
+                <button type="button" class="btn btn-warning">Editar</button>
+                <button type="button" class="btn btn-danger">Eliminar</button>                    
+            </td>
+        </tr>
+        <?php $count++;?>
+        <?php endwhile; ?>
+        
+    </tbody>
+    </table>
