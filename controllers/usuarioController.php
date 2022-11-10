@@ -1,11 +1,12 @@
 <?php
 require_once 'models/user.php';
-require_once 'helper/utils.php'; //desde aca sacamos los deptos
+require_once 'helper/utils.php'; 
 
 class usuarioController{
 
     public function add() {
-        
+
+    if(isset($_SESSION['user'])){
         if(isset($_POST)){
             
             $usuario = isset($_POST['user']) ? $_POST['user'] : NULL;
@@ -21,13 +22,13 @@ class usuarioController{
                 $_SESSION['error']['is_string'] = 'Se estan enviando datos incorrectos';
             }
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $_SESSION['error']['email'] = 'El formato no es correcto';
+                $_SESSION['error']['email'] = 'El formato del correo no es correcto';
             }
             if(strlen($password) > 10){
-                $_SESSION['error']['max'] = 'Excede el máximo de caracteres solicitados';
+                $_SESSION['error']['max'] = 'Excede el máximo de caracteres solicitados en el password';
             }
             if(strlen($password) < 4){
-                $_SESSION['error']['min'] = 'El mínimo de caracteres solicitados es 4';
+                $_SESSION['error']['min'] = 'El mínimo de caracteres solicitados para el password es 4';
             }
             if(!isset($_SESSION['error'])){
                 //realizamos la operacion
@@ -52,7 +53,9 @@ class usuarioController{
             //error, no se ha enviado ningun post
             $_SESSION['msn']['error-post'] = 'No se ha enviado ningún post.';
         }
-        require_once 'views/users/add.php';
+
+    }
+    header("Location:".base_url."usuario/check");
     }
     //----------------------------------------------------------------------------------
 
@@ -62,7 +65,7 @@ class usuarioController{
             $password = isset($_POST['password']) ? $_POST['password'] : NULL;
             
             if(empty($email) || empty($password)){
-                $_SESSION['error']['empty-fields'] = 'Se estan enviando campos vacios';
+                $_SESSION['error']['empty-fields'] = 'Se están enviando campos vacíos';
             }
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
                 $_SESSION['error']['email'] = 'El formato del correo no es correcto';
@@ -102,4 +105,12 @@ class usuarioController{
         header("Location:".base_url);
     }
     //---------------------------------------
+
+    public function check() {
+        $deptos = Utils::showDeptos();
+        $tipos = Utils::showTipos();
+        require_once 'views/users/add.php';
+    } 
+
+
 }

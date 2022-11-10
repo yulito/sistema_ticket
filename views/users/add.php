@@ -1,3 +1,24 @@
+<!--errores-->
+<?php if(isset($_SESSION['error']['empty-fields'])): ?>
+    <div class="sub"><strong class="red"><?=$_SESSION['error']['empty-fields'] ?></strong></div>
+<?php elseif(isset($_SESSION['error']['is_string'])): ?>
+    <div class="sub"><strong class="red"><?=$_SESSION['error']['is_string'] ?></strong></div>
+<?php elseif(isset($_SESSION['error']['email'])): ?>
+    <div class="sub"><strong class="red"><?=$_SESSION['error']['email'] ?></strong></div>
+<?php elseif(isset($_SESSION['error']['max'])): ?>
+    <div class="sub"><strong class="red"><?=$_SESSION['error']['max'] ?></strong></div>
+<?php elseif(isset($_SESSION['error']['min'])): ?>
+    <div class="sub"><strong class="red"><?=$_SESSION['error']['min'] ?></strong></div>
+<?php elseif(isset($_SESSION['msn']['error-post'])):?>
+    <div class="sub"><strong class="red"><?=$_SESSION['msn']['error-post'] ?></strong></div>
+<?php elseif(isset($_SESSION['msn']['error'])):?>
+    <div class="sub"><strong class="red"><?=$_SESSION['msn']['error'] ?></strong></div>
+<?php elseif(isset($_SESSION['msn']['success'])):?>
+    <div class="sub"><strong class="green"><?=$_SESSION['msn']['success'] ?></strong></div>
+<?php endif; ?>
+<?php Utils::deleteSession('error') ?>
+<?php Utils::deleteSession('msn') ?>
+
 <div class="form-add-user">
     <form class="formUserAdd" action="<?=base_url?>usuario/add" method="post">
 

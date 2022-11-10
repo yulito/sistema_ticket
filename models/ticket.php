@@ -56,6 +56,10 @@ class Ticket{
 
     //--------------------------------------------
 
-    
+    public function insertTicket() {
+        $sql = "INSERT INTO ticket VALUES(NULL,'{$this->getAsunto()}','{$this->getDescripcion()}',NOW(),NULL,'{$this->getIdUsuario()}',1,NULL)";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 
 }

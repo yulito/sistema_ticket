@@ -20,4 +20,50 @@
 
     <main>    
         <!------- Contenido principal ------->
-        <div class="container"> 
+    <div class="container"> 
+
+    <?php if(isset($_SESSION['user']['regular'])): ?>
+
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"> <strong><?=$_SESSION['user']['regular']->nombre ?></strong></a> 
+
+
+                <!-- Agregar y listar tickets -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="<?=base_url ?>">Agregar</a> 
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pendientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">En proceso</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Resueltos</a>
+                    </li>
+
+                    <?php if(isset($_SESSION['user']['admin'])) : ?>
+                            
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?=base_url?>usuario/check">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Departamentos</a>
+                        </li>
+
+                    <?php endif; ?>
+                </ul>
+
+
+                <a class="navbar-brand" href="<?=base_url?>usuario/logout">
+                    <div id="logout">X</div>
+                </a>
+                
+            </div>
+        </nav>                    
+
+        
+        
+    <?php endif; ?>
