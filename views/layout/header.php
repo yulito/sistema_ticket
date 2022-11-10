@@ -35,13 +35,13 @@
                         <a class="nav-link " aria-current="page" href="<?=base_url ?>">Agregar</a> 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pendientes</a>
+                        <a class="nav-link" href="<?=base_url?>ticket/standby">Pendientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">En proceso</a>
+                        <a class="nav-link" href="<?=base_url?>ticket/inprocess">En proceso</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Resueltos</a>
+                        <a class="nav-link" href="<?=base_url?>ticket/resolved">Resueltos</a>
                     </li>
 
                     <?php if(isset($_SESSION['user']['admin'])) : ?>

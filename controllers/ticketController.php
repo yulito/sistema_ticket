@@ -44,6 +44,49 @@ class ticketController{
     }
     //------------------------------------------------------------------------
 
-
+    public function standby() {
+        $obj = new Ticket();
+        $obj->setIdEstado(1);        
+        $list = $obj->getAll(true);
+        
+        $nomEstado = 'Pendientes';
+        require_once 'views/ticket/list.php';
+    }    
+    //----------
     
+    public function inprocess() {
+        $obj = new Ticket();
+        $obj->setIdEstado(3);
+        $list = $obj->getAll(true);
+        
+        $nomEstado = 'Procesando';        
+        require_once 'views/ticket/list.php';
+    }
+
+    //----------------
+    
+    public function resolved() {
+        $obj = new Ticket();
+        $obj->setIdEstado(2);
+        $list = $obj->getAll(true);
+       
+        $nomEstado = 'Resueltos';
+        require_once 'views/ticket/list.php';
+    }
+
+    //-----------------------------------------------
+
+    public function watch(){
+        if(isset($_GET['id'])){
+            $obj = new Ticket();
+            $obj->setIdTicket($_GET['id']);
+
+            $one = $obj->getOne();
+            require_once 'views/ticket/ticket.php';
+            
+        }else{
+            require_once 'views/ticket/add.php';
+        }
+    }
+
 }

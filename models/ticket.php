@@ -62,4 +62,38 @@ class Ticket{
         return $query;
     }
 
+    //--------------------------------------------
+
+    public function getAll($bool = null){
+        $sql = "SELECT id_ticket,asunto,fecemision,fecsolucion,nombre,estado,depto 
+                FROM ticket INNER JOIN usuario USING(id_usuario) 
+                INNER JOIN estado USING(id_estado)  
+                INNER JOIN departamento USING(id_depto) ";
+        if($bool){
+            $sql .= "WHERE id_estado = '{$this->getIdEstado()}' ";
+        }
+        if(!isset($_SESSION['user']['admin'])){
+            $id = $_SESSION['user']['regular']->id_usuario;
+            $sql .= "AND id_usuario = '$id' ";
+        }
+        $sql .= "ORDER BY id_ticket DESC;";
+
+        $query = $this->db->query($sql);
+        return $query;        
+    }
+    //--------------------------------------------
+
+    public function getOne(){
+        $sql = "SELECT id_ticket,asunto,descripcion,fecemision,fecsolucion,nombre,estado,solucion,depto 
+                FROM ticket INNER JOIN usuario USING(id_usuario) 
+                INNER JOIN estado USING(id_estado)
+                INNER JOIN departamento USING(id_depto)
+                WHERE id_ticket = '{$this->getIdTicket()}'";
+
+        $query = $this->db->query($sql);
+        return $query->fetch_object();
+    }
+    //---------------------------------------------
+
+
 }

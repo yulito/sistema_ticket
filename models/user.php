@@ -101,7 +101,7 @@ class User{
     //-----------------------------------------------------------------------
 
     public function getAll($id=null){
-        $sql = "SELECT nombre,correo,depto,tipo FROM usuario INNER JOIN departamento USING(id_depto) 
+        $sql = "SELECT id_usuario,nombre,correo,depto,tipo FROM usuario INNER JOIN departamento USING(id_depto) 
                 INNER JOIN tipo_usuario USING(id_tipo)";
         if($id){
             $sql .= " WHERE id_usuario != '$id'";

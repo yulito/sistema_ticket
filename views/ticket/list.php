@@ -1,7 +1,8 @@
  <!----------------------------------------------------------------------------------->
  <div class="sub">
-    <h2>Listado de tickets</h2>
-</div>        
+    <h2><strong class="<?=$nomEstado?>"><?=$nomEstado?></strong></h2>
+</div>    
+
 <table class="table table-bordered table-info table-striped">
     <thead>
         <tr>
@@ -9,38 +10,36 @@
             <th scope="col">Asunto</th>
             <th scope="col">Emisión</th>
             <th scope="col">Resolución</th>
-            <th scope="col">Estado</th>
-
+            <th scope="col">Área</th>
             <th scope="col">Usuario</th>
             <!-- Para botones -->
+            <th scope="col">Info</th>
+            <?php if(isset($_SESSION['user']['admin'])):?>
             <th scope="col">Acción</th>
+            <?php endif; ?>
         </tr>
     </thead>
     <tbody>
+        <?php $count = 1; ?>
+        <?php while($ticket = $list->fetch_object()): ?>
         <tr>
-            <th scope="row">1</th>
-            <td>Pantallazo azul</td>
-            <td>04/11/2022</td>
-            <td>--</td>
-            <td class="estado">Pendiente</td>
-            <td>Karina</td>
+            <th scope="row"><?=$count?></th>
+            <td><?=$ticket->asunto ?></td>
+            <td><?=$ticket->fecemision ?></td>
+            <td><?=isset($ticket->fecsolucion) ? $ticket->fecsolucion : "--"?></td>
+            <td><?=$ticket->depto ?></td>
+            <td><?=$ticket->nombre ?></td>
             <td>
-                <button type="button" class="btn btn-warning">Editar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>                    
+                <a class="btn btn-info" href="<?=base_url?>ticket/watch&id=<?=$ticket->id_ticket?>" role="button">Ver</a>
             </td>
+                <?php if(isset($_SESSION['user']['admin'])):?>
+                <td>
+                <a class="btn btn-warning" href="#" role="button">Editar</a>
+                <a class="btn btn-danger" href="#" role="button">Eliminar</a>                
+                </td>                
+                <?php endif; ?>
         </tr>
-        <tr>
-        <th scope="row">2</th>
-            <td>El teclado no funciona correctamente</td>
-            <td>16/11/2022</td>
-            <td>16/12/2022</td>
-            <td class="estado">Resuelto</td>
-            <td>Marcelo</td>
-            <td>
-                <button type="button" class="btn btn-warning">Editar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>
-            </td>
-        </tr>
-        
+        <?php $count++ ; ?>
+        <?php endwhile; ?>
     </tbody>
     </table>

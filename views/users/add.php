@@ -87,8 +87,8 @@
             <td><?=$listUser->depto ?></td>
             <td><?=$listUser->tipo ?></td>
             <td>
-                <button type="button" class="btn btn-warning">Editar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>                    
+                <a class="btn btn-warning" href="#" role="button">Editar</a>
+                <a class="btn btn-danger" href="#" role="button">Eliminar</a>                    
             </td>
         </tr>
         <?php $count++;?>
