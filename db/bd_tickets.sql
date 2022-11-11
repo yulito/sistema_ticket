@@ -50,7 +50,7 @@ CREATE TABLE `departamento` (
   `id_depto` int NOT NULL AUTO_INCREMENT,
   `depto` varchar(70) NOT NULL,
   PRIMARY KEY (`id_depto`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,10 +71,10 @@ DROP TABLE IF EXISTS `estado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `estado` (
-  `id_est` int NOT NULL AUTO_INCREMENT,
-  `est` char(10) NOT NULL,
-  PRIMARY KEY (`id_est`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id_estado` int NOT NULL,
+  `estado` char(10) DEFAULT NULL,
+  PRIMARY KEY (`id_estado`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +104,7 @@ CREATE TABLE `sesion` (
   KEY `sesion_user_fk` (`id_usuario`),
   CONSTRAINT `sesion_access_fk` FOREIGN KEY (`id_acceso`) REFERENCES `acceso` (`id_acceso`),
   CONSTRAINT `sesion_user_fk` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE `ticket` (
   PRIMARY KEY (`id_ticket`),
   KEY `tic_usu` (`id_usuario`),
   CONSTRAINT `tic_usu` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,14 +183,14 @@ CREATE TABLE `usuario` (
   `nombre` varchar(80) NOT NULL,
   `correo` varchar(120) NOT NULL,
   `password` varchar(225) NOT NULL,
-  `id_depto` int NULL, /* Es nuleable ya que si eliminamos en cascada podemos actualizar al usuario (dejando en nulo) antes de eliminar el depto  */
+  `id_depto` int DEFAULT NULL,
   `id_tipo` int NOT NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `usu_depto` (`id_depto`),
   KEY `usu_tipo` (`id_tipo`),
   CONSTRAINT `usu_depto` FOREIGN KEY (`id_depto`) REFERENCES `departamento` (`id_depto`),
   CONSTRAINT `usu_tipo` FOREIGN KEY (`id_tipo`) REFERENCES `tipo_usuario` (`id_tipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,6 +199,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'ADMIN','admin@admin.com','$2y$04$.yKSAhRsU4ez13umX5hGsucaZiOnVdxwPtm8CJAOVrQRbmqeswMye',1,1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -211,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-04 19:35:40
+-- Dump completed on 2022-11-11 17:59:51
