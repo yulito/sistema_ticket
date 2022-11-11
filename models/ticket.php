@@ -84,7 +84,7 @@ class Ticket{
     //--------------------------------------------
 
     public function getOne(){
-        $sql = "SELECT id_ticket,asunto,descripcion,fecemision,fecsolucion,nombre,estado,solucion,depto 
+        $sql = "SELECT id_ticket,asunto,descripcion,fecemision,fecsolucion,nombre,correo,id_estado,estado,solucion,depto 
                 FROM ticket INNER JOIN usuario USING(id_usuario) 
                 INNER JOIN estado USING(id_estado)
                 INNER JOIN departamento USING(id_depto)
@@ -94,6 +94,17 @@ class Ticket{
         return $query->fetch_object();
     }
     //---------------------------------------------
-
+    public function update(){
+        
+        $sql = "UPDATE ticket 
+                SET id_estado = '{$this->getIdEstado()}',
+                    solucion = '{$this->getSolucion()}'";
+        if($this->getIdEstado() == 2){
+            $sql .= ",fecsolucion = NOW()";
+        }
+        $sql .= " WHERE id_ticket = '{$this->getIdTicket()}'";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 
 }

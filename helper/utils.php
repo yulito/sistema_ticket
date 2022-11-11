@@ -24,5 +24,15 @@ class Utils{
         return $data;
     }
 
-    
+    public static function showStatus(){
+        require_once 'config/connection.php';
+        $db = Database::connect();   
+        $estado = $db->query("SELECT * FROM estado ORDER BY id_estado DESC;");
+		return $estado;
+    }
+    public static function change($id){
+        require_once 'config/connection.php';
+        $db = Database::connect();   
+        $db->query("UPDATE ticket SET id_estado = 3 WHERE id_ticket = '$id'");
+    }
 }

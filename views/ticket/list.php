@@ -34,7 +34,12 @@
             </td>
                 <?php if(isset($_SESSION['user']['admin'])):?>
                 <td>
-                <a class="btn btn-warning" href="#" role="button">Editar</a>
+                <?php if($ticket->estado == "En proceso"):?>
+                <a class="btn btn-warning" href="<?=base_url?>ticket/edit&id=<?=$ticket->id_ticket?>" role="button">Editar</a>
+                <?php endif; ?>
+                <?php if($ticket->estado == "Pendiente"):?>
+                <a class="btn btn-secondary" href="<?=base_url?>ticket/changeStatus&id=<?=$ticket->id_ticket?>" role="button">Procesar</a> 
+                <?php endif; ?>
                 <a class="btn btn-danger" href="#" role="button">Eliminar</a>                
                 </td>                
                 <?php endif; ?>

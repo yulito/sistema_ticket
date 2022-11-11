@@ -80,13 +80,46 @@ class ticketController{
         if(isset($_GET['id'])){
             $obj = new Ticket();
             $obj->setIdTicket($_GET['id']);
-
             $one = $obj->getOne();
-            require_once 'views/ticket/ticket.php';
-            
+            require_once 'views/ticket/ticket.php';            
         }else{
             require_once 'views/ticket/add.php';
         }
     }
+    //-------------------------------------------------
+    public function edit(){
+        if(isset($_GET['id'])){            
+            $obj = new Ticket();
+            $obj->setIdTicket($_GET['id']);
+            $one = $obj->getOne();
+            $estado = Utils::showStatus();
+            require_once 'views/ticket/edit.php';           
+        }else{
+            require_once 'views/ticket/add.php';
+        }
+    }
+    //---------------------------------------------------
+    public function changeStatus(){
+        if(isset($_GET['id'])){ 
+            $id = $_GET['id'];
+            Utils::change($id);
+        }
+        header("Location: ".base_url);
+    }
 
+    //---------------------------------------------------
+    public function modify(){
+        if(isset($_POST)){     
+            $estado = (int)$_POST['estado'];
+            $solucion = $_POST['solucion'];
+            $id = (int)$_POST['idTicket'];
+            $obj = new Ticket();
+            $obj->setIdEstado($estado);
+            $obj->setSolucion($solucion);
+            $obj->setIdTicket($id);
+            $obj->update();  
+            header("Location: ".base_url);       
+        }
+         
+    }
 }
