@@ -1,12 +1,9 @@
-<!--errores-->
-
-
-
 
 <div class="form-edit-user">
     <form class="formUserEdit" action="<?=base_url?>usuario/modify" method="post">
         <div class="sub">
             <h2>Editar usuario</h2>
+            <p class="red">* Solo puedes modificar el tipo de usuario y su departamento o área.</p>
         </div>
         <hr>  
         <input type="hidden" name="idUsuario" value="<?=$one->id_usuario?>">

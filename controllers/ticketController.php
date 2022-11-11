@@ -1,6 +1,5 @@
 <?php
 require_once 'models/ticket.php';
-//require_once 'helper/utils.php'; 
 
 class ticketController{
 

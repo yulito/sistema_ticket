@@ -50,7 +50,7 @@
                             <a class="nav-link" href="<?=base_url?>usuario/check">Usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Departamentos</a>
+                            <a class="nav-link" href="<?=base_url?>depto/check">Departamentos</a>
                         </li>
 
                     <?php endif; ?>
