@@ -94,8 +94,7 @@ class Ticket{
         return $query->fetch_object();
     }
     //---------------------------------------------
-    public function update(){
-        
+    public function update(){    
         $sql = "UPDATE ticket 
                 SET id_estado = '{$this->getIdEstado()}',
                     solucion = '{$this->getSolucion()}'";
@@ -103,6 +102,12 @@ class Ticket{
             $sql .= ",fecsolucion = NOW()";
         }
         $sql .= " WHERE id_ticket = '{$this->getIdTicket()}'";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+    //---------------------------------------------
+    public function delete(){
+        $sql = "DELETE FROM ticket WHERE id_ticket= '{$this->getIdTicket()}'";
         $query = $this->db->query($sql);
         return $query;
     }

@@ -84,11 +84,11 @@
             <th scope="row"><?=$count?></th>
             <td><?=$listUser->nombre ?></td>
             <td><?=$listUser->correo ?></td>
-            <td><?=$listUser->depto ?></td>
+            <td><?=isset($listUser->depto) ? $listUser->depto : "--" ?></td>
             <td><?=$listUser->tipo ?></td>
             <td>
-                <a class="btn btn-warning" href="#" role="button">Editar</a>
-                <a class="btn btn-danger" href="#" role="button">Eliminar</a>                    
+                <a class="btn btn-warning" href="<?=base_url?>usuario/update&id=<?=$listUser->id_usuario?>" role="button">Editar</a>
+                <a class="btn btn-danger" href="<?=base_url?>usuario/delete&id=<?=$listUser->id_usuario?>" role="button">Eliminar</a>                    
             </td>
         </tr>
         <?php $count++;?>

@@ -117,9 +117,18 @@ class ticketController{
             $obj->setIdEstado($estado);
             $obj->setSolucion($solucion);
             $obj->setIdTicket($id);
-            $obj->update();  
-            header("Location: ".base_url);       
+            $obj->update();                    
         }
-         
+        header("Location: ".base_url);
+    }
+    //----------------------------------------------------
+    public function delete(){
+        if(isset($_GET['id'])){ 
+            $id = $_GET['id'];
+            $obj = new Ticket();
+            $obj->setIdTicket($id);
+            $obj->delete();
+        }
+        header("Location: ".base_url);
     }
 }

@@ -101,17 +101,44 @@ class User{
     //-----------------------------------------------------------------------
 
     public function getAll($id=null){
-        $sql = "SELECT id_usuario,nombre,correo,depto,tipo FROM usuario INNER JOIN departamento USING(id_depto) 
+        $sql = "SELECT id_usuario,nombre,correo,depto,tipo FROM usuario LEFT JOIN departamento USING(id_depto) 
                 INNER JOIN tipo_usuario USING(id_tipo)";
         if($id){
             $sql .= " WHERE id_usuario != '$id'";
         }
+        $sql .= " ORDER BY id_usuario DESC;";
         $query = $this->db->query($sql);
         return $query;
     }
+    //-----------------------------------------------------------------------
+    public function getOne() {
+        $sql = "SELECT id_usuario,nombre,correo,id_depto,depto,id_tipo,tipo 
+                FROM usuario LEFT JOIN departamento USING(id_depto) 
+                INNER JOIN tipo_usuario USING(id_tipo)
+                WHERE id_usuario = '{$this->getIdUser()}'";
+        $query = $this->db->query($sql);
+        return $query->fetch_object();
+    }
 
     //----------------------------------------------------------------------
+    public function delete(){
+        $sql = "DELETE FROM sesion WHERE id_usuario = '{$this->getIdUser()}'";
+        $sql1 = "DELETE FROM ticket WHERE id_usuario = '{$this->getIdUser()}'";
+        $sql2 = "DELETE FROM usuario WHERE id_usuario = '{$this->getIdUser()}'";
+        $sesion = $this->db->query($sql);
+        $ticket = $this->db->query($sql1);
+        $query = $this->db->query($sql2);
+        return $query;
+    }
+    //----------------------------------------------------------------------
+    public function modify(){
+        $sql = "UPDATE usuario 
+                SET id_tipo = '{$this->getIdTipo()}',
+                id_depto = '{$this->getIdDepto()}'
+                WHERE id_usuario = '{$this->getIdUser()}';";
 
-
+        $query = $this->db->query($sql);
+        return $query;
+    }
 
 }

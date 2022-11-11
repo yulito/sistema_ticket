@@ -105,12 +105,9 @@ class usuarioController{
         header("Location:".base_url);
     }
     //---------------------------------------
-
     public function check() {
-
         $deptos = Utils::showDeptos();
         $tipos = Utils::showTipos();
-
         $obj = new User();
         $list = $obj->getAll($_SESSION['user']['regular']->id_usuario);
 
@@ -119,6 +116,44 @@ class usuarioController{
         }
         require_once 'views/users/add.php';
     } 
+    //---------------------------------------
+
+    public function delete(){
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            $obj = new User();
+            $obj->setIdUser($id);
+            $obj->delete();            
+        }
+        header("Location: ".base_url);
+    }
+    //-------------------------------------------
+    public function update(){
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            $obj = new User();
+            $obj->setIdUser($id);
+
+            $one = $obj->getOne();
+            $deptos = Utils::showDeptos();
+            $tipos = Utils::showTipos();
+        }
+        require_once 'views/users/edit.php';
+    }
+    //-------------------------------------------
+    public function modify(){
+        if(isset($_POST)){
+            $id = isset($_POST['idUsuario']) ? (int)$_POST['idUsuario'] : NULL;
+            $depto = isset($_POST['depto']) ? (int)$_POST['depto'] : NULL;
+            $tipo = isset($_POST['tipo']) ? (int)$_POST['tipo'] : NULL;            
+                $obj = new User();
+                $obj->setIdUser($id);
+                $obj->setIdDepto($depto);
+                $obj->setIdTipo($tipo);
+                $obj->modify();                                                   
+        }
+        header("Location: ".base_url);
+    }
 
 
 }

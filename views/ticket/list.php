@@ -40,7 +40,7 @@
                 <?php if($ticket->estado == "Pendiente"):?>
                 <a class="btn btn-secondary" href="<?=base_url?>ticket/changeStatus&id=<?=$ticket->id_ticket?>" role="button">Procesar</a> 
                 <?php endif; ?>
-                <a class="btn btn-danger" href="#" role="button">Eliminar</a>                
+                <a class="btn btn-danger" href="<?=base_url?>ticket/delete&id=<?=$ticket->id_ticket?>" role="button">Eliminar</a>                
                 </td>                
                 <?php endif; ?>
         </tr>

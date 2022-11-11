@@ -183,7 +183,7 @@ CREATE TABLE `usuario` (
   `nombre` varchar(80) NOT NULL,
   `correo` varchar(120) NOT NULL,
   `password` varchar(225) NOT NULL,
-  `id_depto` int NOT NULL,
+  `id_depto` int NULL, /* Es nuleable ya que si eliminamos en cascada podemos actualizar al usuario (dejando en nulo) antes de eliminar el depto  */
   `id_tipo` int NOT NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `usu_depto` (`id_depto`),
